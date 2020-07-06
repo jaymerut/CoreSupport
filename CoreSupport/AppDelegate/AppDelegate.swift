@@ -25,14 +25,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         itemServices.title = "Services & Opportunities"
         itemServices.image = UIImage(named: "core_services_icon")
         
+        let itemContactUs = UITabBarItem()
+        itemContactUs.title = "Contact Us"
+        itemContactUs.image = UIImage(named: "core_contact_us_icon")
+        
         let homeVC = HomeViewController()
         homeVC.tabBarItem = itemHome
         
         let servicesVC = ServicesOpportunityViewController()
         servicesVC.tabBarItem = itemServices
         
+        let contactUsVC = ContactUsViewController()
+        contactUsVC.tabBarItem = itemContactUs
+        
         let customTabBarController = UITabBarController()
-        customTabBarController.viewControllers = [homeVC, servicesVC]
+        customTabBarController.viewControllers = [homeVC, servicesVC, contactUsVC]
         window!.rootViewController = customTabBarController
 
         //let navigationController = UINavigationController(rootViewController: mainViewController)

@@ -90,7 +90,7 @@ class ServicesOpportunityViewController: BaseViewController {
         viewInfo.layer.cornerRadius = 10
         containerView.addSubview(viewInfo)
         viewInfo.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(self.containerView.snp.top).offset(10)
+            make.top.equalTo(self.containerView.snp.top).offset(30)
             make.left.equalTo(self.containerView.snp.left)
             make.right.equalTo(self.containerView.snp.right)
             //make.height.equalTo(375)
