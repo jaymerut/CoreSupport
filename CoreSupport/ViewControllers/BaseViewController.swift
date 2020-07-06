@@ -70,7 +70,6 @@ class BaseViewController: UIViewController {
         self.view.backgroundColor = UIColor(hex: "#D3E4CDFF")
         // Scroll View
         collectionView.backgroundColor = UIColor(hex: "#D3E4CDFF")
-        collectionView.isUserInteractionEnabled = true
         self.view.addSubview(collectionView)
         collectionView.snp.makeConstraints { (make) -> Void in
             if #available(iOS 11.0, *) {
@@ -86,6 +85,7 @@ class BaseViewController: UIViewController {
         // Image View Background
         imageViewBackground.image = UIImage(named: "coresupport_background")
         imageViewBackground.contentMode = UIView.ContentMode.scaleAspectFill
+        imageViewBackground.isUserInteractionEnabled = true
         collectionView.addSubview(imageViewBackground)
         imageViewBackground.snp.makeConstraints { (make) -> Void in
             make.top.bottom.equalTo(self.collectionView)
