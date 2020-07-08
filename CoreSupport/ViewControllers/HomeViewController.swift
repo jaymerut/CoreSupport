@@ -14,6 +14,9 @@ class HomeViewController: BaseViewController {
     
     // MARK: - Variables
     var viewInfo = UIView(frame: CGRect.zero)
+    
+    var imageViewMain = UIImageView(frame: CGRect.zero)
+    
     var labelInfoTitle = UILabel(frame: CGRect.zero)
     var labelInfoSubTitle = UILabel(frame:CGRect.zero)
     var labelInfoSection1 = UILabel(frame:CGRect.zero)
@@ -71,7 +74,6 @@ class HomeViewController: BaseViewController {
             make.top.equalTo(imageViewBackground.snp.top).offset(30)
             make.left.equalTo(imageViewBackground.snp.left).offset(20)
             make.right.equalTo(imageViewBackground.snp.right).inset(20)
-            make.height.equalTo(375)
         }
         
         // Label Info Title
@@ -86,6 +88,17 @@ class HomeViewController: BaseViewController {
             make.right.equalTo(viewInfo.snp.right).inset(10)
         }
         
+        // Image View Main
+        imageViewMain.image = UIImage(named: "home_help")
+        imageViewMain.contentMode = UIView.ContentMode.scaleAspectFit
+        viewInfo.addSubview(imageViewMain)
+        imageViewMain.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(self.labelInfoTitle.snp.bottom).offset(20)
+            make.left.equalTo(self.viewInfo.snp.left).offset(15)
+            make.right.equalTo(self.viewInfo.snp.right).inset(15)
+            make.height.equalTo(200)
+        }
+        
         // Label Info SubTitle
         labelInfoSubTitle.text = "Social Services for Elderly and Developmentally Disabled"
         labelInfoSubTitle.font = UIFont(name: "Galvji-Bold", size: 16.0)
@@ -94,7 +107,7 @@ class HomeViewController: BaseViewController {
         labelInfoSubTitle.numberOfLines = 0;
         viewInfo.addSubview(labelInfoSubTitle)
         labelInfoSubTitle.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(self.labelInfoTitle.snp.bottom).offset(20)
+            make.top.equalTo(self.imageViewMain.snp.bottom).offset(20)
             make.left.equalTo(self.viewInfo.snp.left).offset(15)
             make.right.equalTo(self.viewInfo.snp.right).inset(15)
         }
@@ -123,6 +136,7 @@ class HomeViewController: BaseViewController {
             make.top.equalTo(self.labelInfoSection1.snp.bottom).offset(10)
             make.left.equalTo(self.viewInfo.snp.left).offset(15)
             make.right.equalTo(self.viewInfo.snp.right).inset(15)
+            make.bottom.equalTo(self.viewInfo.snp.bottom).inset(20)
         }
     }
     

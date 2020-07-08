@@ -8,12 +8,15 @@
 
 import UIKit
 import SnapKit
+import WebKit
 
 
-class ServicesOpportunityViewController: BaseViewController {
+class ServicesOpportunityViewController: BaseViewController, WKNavigationDelegate {
     
     
     // MARK: - Variables
+    var webView = WKWebView()
+    
     var containerView = UIView(frame: CGRect.zero)
     var viewInfo = UIView(frame: CGRect.zero)
     var viewServicesInfo = UIView(frame: CGRect.zero)
@@ -58,6 +61,7 @@ class ServicesOpportunityViewController: BaseViewController {
         super.viewDidLoad()
         
         self.title = "Services & Opportunities"
+        webView.navigationDelegate = self
         // Setup
         setupServicesOpportunityViewController()
     }
@@ -77,6 +81,7 @@ class ServicesOpportunityViewController: BaseViewController {
         
         // Container View
         containerView.backgroundColor = UIColor.clear
+        containerView.isUserInteractionEnabled = true
         imageViewBackground.addSubview(containerView)
         containerView.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(imageViewBackground.snp.top)
@@ -183,13 +188,13 @@ class ServicesOpportunityViewController: BaseViewController {
         // View JoinUsInfo
         viewJoinUsInfo.backgroundColor = UIColor(hex: "#D3E4CDE6")
         viewJoinUsInfo.layer.cornerRadius = 10
+        viewJoinUsInfo.isUserInteractionEnabled = true
         containerView.addSubview(viewJoinUsInfo)
         viewJoinUsInfo.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(viewServicesInfo.snp.bottom).offset(30)
             make.left.equalTo(self.containerView.snp.left)
             make.right.equalTo(self.containerView.snp.right)
             make.bottom.equalTo(self.containerView.snp.bottom).inset(20)
-            //make.height.equalTo(200)
         }
         // Label JoinUsInfo SubTitle
         labelJoinUsInfoSubTitle.text = "Join Our Team!"
@@ -223,7 +228,10 @@ class ServicesOpportunityViewController: BaseViewController {
         buttonApplication.setTitleColor(UIColor.black, for: UIControl.State.selected)
         buttonApplication.backgroundColor = UIColor(hex: "#3D5C32FF")
         buttonApplication.layer.cornerRadius = 10
+        buttonApplication.addTarget(self, action:#selector(self.buttonClicked), for: .touchUpInside)
         viewJoinUsInfo.addSubview(buttonApplication)
+        buttonApplication.isUserInteractionEnabled = true
+        buttonApplication.isEnabled = true
         buttonApplication.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(labelJoinUsInfoSection.snp.bottom).offset(10)
             make.left.equalTo(self.viewJoinUsInfo.snp.left).offset(30)
@@ -232,8 +240,25 @@ class ServicesOpportunityViewController: BaseViewController {
             make.height.equalTo(40)
         }
     }
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if let url = navigationAction.request.url {
+            print(url.host)
+            if url.host == "uploads.documents.cimpress.io" {
+                UIApplication.shared.open(url)
+                decisionHandler(.cancel)
+                return
+            }
+        }
+
+        decisionHandler(.allow)
+    }
     
-    
+    @objc func buttonClicked() {
+        print("Button tapped")
+        let url = URL(string: "http://uploads.documents.cimpress.io/v1/uploads/fffe32f1-3fdd-41a6-8aff-a946e4d08f98~110/original?tenant=vbu-digital")!
+        webView.load(URLRequest(url: url))
+        webView.allowsBackForwardNavigationGestures = true
+    }
     
     // MARK: - Public API
     
