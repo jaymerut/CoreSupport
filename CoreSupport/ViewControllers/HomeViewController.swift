@@ -68,13 +68,9 @@ class HomeViewController: BaseViewController {
         viewInfo.layer.cornerRadius = 10
         imageViewBackground.addSubview(viewInfo)
         viewInfo.snp.makeConstraints { (make) -> Void in
-            if #available(iOS 11.0, *) {
-                make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(10);
-            } else {
-                make.top.equalTo(self.view.snp.top).offset(10);
-            }
-            make.left.equalTo(self.view.snp.left).offset(20)
-            make.right.equalTo(self.view.snp.right).inset(20)
+            make.top.equalTo(imageViewBackground.snp.top).offset(10)
+            make.left.equalTo(imageViewBackground.snp.left).offset(20)
+            make.right.equalTo(imageViewBackground.snp.right).inset(20)
             make.height.equalTo(375)
         }
         
@@ -99,8 +95,8 @@ class HomeViewController: BaseViewController {
         viewInfo.addSubview(labelInfoSubTitle)
         labelInfoSubTitle.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(self.labelInfoTitle.snp.bottom).offset(20)
-            make.left.equalTo(self.viewInfo.snp.left).offset(10)
-            make.right.equalTo(self.viewInfo.snp.right).inset(10)
+            make.left.equalTo(self.viewInfo.snp.left).offset(15)
+            make.right.equalTo(self.viewInfo.snp.right).inset(15)
         }
         
         // Label Info Section1
@@ -112,8 +108,8 @@ class HomeViewController: BaseViewController {
         viewInfo.addSubview(labelInfoSection1)
         labelInfoSection1.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(self.labelInfoSubTitle.snp.bottom).offset(10)
-            make.left.equalTo(self.viewInfo.snp.left).offset(10)
-            make.right.equalTo(self.viewInfo.snp.right).inset(10)
+            make.left.equalTo(self.viewInfo.snp.left).offset(15)
+            make.right.equalTo(self.viewInfo.snp.right).inset(15)
         }
         
         // Label Info Section2
@@ -125,8 +121,8 @@ class HomeViewController: BaseViewController {
         viewInfo.addSubview(labelInfoSection2)
         labelInfoSection2.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(self.labelInfoSection1.snp.bottom).offset(10)
-            make.left.equalTo(self.viewInfo.snp.left).offset(10)
-            make.right.equalTo(self.viewInfo.snp.right).inset(10)
+            make.left.equalTo(self.viewInfo.snp.left).offset(15)
+            make.right.equalTo(self.viewInfo.snp.right).inset(15)
         }
     }
     

@@ -12,7 +12,6 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var homeViewController :UIViewController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -22,11 +21,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         itemHome.title = "Home"
         itemHome.image = UIImage(named: "core_home_icon")
         
+        let itemServices = UITabBarItem()
+        itemServices.title = "Services & Opportunities"
+        itemServices.image = UIImage(named: "core_services_icon")
+        
         let homeVC = HomeViewController()
         homeVC.tabBarItem = itemHome
-        let customTabBarController = UITabBarController()
         
-        customTabBarController.viewControllers = [homeVC]
+        let servicesVC = ServicesOpportunityViewController()
+        servicesVC.tabBarItem = itemServices
+        
+        let customTabBarController = UITabBarController()
+        customTabBarController.viewControllers = [homeVC, servicesVC]
         window!.rootViewController = customTabBarController
 
         //let navigationController = UINavigationController(rootViewController: mainViewController)
