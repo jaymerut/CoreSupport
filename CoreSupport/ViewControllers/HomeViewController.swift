@@ -68,7 +68,7 @@ class HomeViewController: BaseViewController {
         viewInfo.layer.cornerRadius = 10
         imageViewBackground.addSubview(viewInfo)
         viewInfo.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(imageViewBackground.snp.top).offset(10)
+            make.top.equalTo(imageViewBackground.snp.top).offset(30)
             make.left.equalTo(imageViewBackground.snp.left).offset(20)
             make.right.equalTo(imageViewBackground.snp.right).inset(20)
             make.height.equalTo(375)

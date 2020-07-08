@@ -70,6 +70,7 @@ class BaseViewController: UIViewController {
         self.view.backgroundColor = UIColor(hex: "#D3E4CDFF")
         // Scroll View
         collectionView.backgroundColor = UIColor(hex: "#D3E4CDFF")
+        collectionView.isUserInteractionEnabled = true
         self.view.addSubview(collectionView)
         collectionView.snp.makeConstraints { (make) -> Void in
             if #available(iOS 11.0, *) {
