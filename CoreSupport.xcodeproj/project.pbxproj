@@ -683,7 +683,8 @@
 			baseConfigurationReference = 8EC94B2291D4431EC9479C53 /* Pods-CoreSupport.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Jayme Rutkoski (BT4J67MR3F)";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = BT4J67MR3F;
 				INFOPLIST_FILE = CoreSupport/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -692,6 +693,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.appnonsense.CoreSupport;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = CoreSupportDistribution;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -702,8 +704,9 @@
 			baseConfigurationReference = 4F14E2B00A143CEFB80C059D /* Pods-CoreSupport.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V8L63862FY;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Jayme Rutkoski (BT4J67MR3F)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = BT4J67MR3F;
 				INFOPLIST_FILE = CoreSupport/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -711,6 +714,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.appnonsense.CoreSupport;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = CoreSupportDistribution;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -723,7 +727,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V8L63862FY;
+				DEVELOPMENT_TEAM = BT4J67MR3F;
 				INFOPLIST_FILE = CoreSupportTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -746,7 +750,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V8L63862FY;
+				DEVELOPMENT_TEAM = BT4J67MR3F;
 				INFOPLIST_FILE = CoreSupportTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -768,7 +772,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V8L63862FY;
+				DEVELOPMENT_TEAM = BT4J67MR3F;
 				INFOPLIST_FILE = CoreSupportUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -789,7 +793,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V8L63862FY;
+				DEVELOPMENT_TEAM = BT4J67MR3F;
 				INFOPLIST_FILE = CoreSupportUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
