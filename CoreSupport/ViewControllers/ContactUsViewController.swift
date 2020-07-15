@@ -11,25 +11,25 @@ import SnapKit
 import MapKit
 
 
-class ContactUsViewController: BaseViewController, MKMapViewDelegate {
+class ContactUsViewController: BaseViewController {
     
     
     // MARK: - Variables
     var viewInfo = UIView(frame: CGRect.zero)
     var viewContact = UIView(frame: CGRect.zero)
     var viewHours = UIView(frame: CGRect.zero)
+    var viewMap = UIView(frame: CGRect.zero)
     
-    var mapView = MKMapView(frame: CGRect.zero)
+    var imageViewMap = UIImageView(frame: CGRect.zero)
+    var imageViewArrow = UIImageView(frame: CGRect.zero)
     
     var labelInfoTitle = UILabel(frame: CGRect.zero)
     var labelInfoSection = UILabel(frame:CGRect.zero)
     var labelContactTitle = UILabel(frame: CGRect.zero)
+    var labelContactAddress = UILabel(frame: CGRect.zero)
     var labelContactSection = UILabel(frame:CGRect.zero)
     var labelHoursTitle = UILabel(frame: CGRect.zero)
     var labelHoursSection = UILabel(frame:CGRect.zero)
-    
-    let initialLocation = CLLocation(latitude: 34.544385, longitude: -112.471750)
-    let annotation = MKPointAnnotation()
     
     // MARK: - Initialization
     private func customInitContactUsViewController() {
@@ -57,15 +57,12 @@ class ContactUsViewController: BaseViewController, MKMapViewDelegate {
         
         self.title = "Contact Us"
         
-        let coordinate = CLLocationCoordinate2D(latitude: 34.544385, longitude: -112.471750)
-        let mapCamera = MKMapCamera(lookingAtCenter: coordinate, fromEyeCoordinate: coordinate, eyeAltitude: 1000)
-        mapView.delegate = self
-        mapView.centerToLocation(initialLocation)
-        mapView.setCamera(mapCamera, animated: true)
+        viewMap.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:))))
+        viewMap.isUserInteractionEnabled = true
+        viewContact.isUserInteractionEnabled = true
+        imageViewBackground.isUserInteractionEnabled = true
+        imageViewMap.isUserInteractionEnabled = true
         
-        annotation.title = "Core Support Inc"
-        annotation.coordinate = coordinate
-        mapView.addAnnotation(annotation)
         // Setup
         setupContactUsViewController()
     }
@@ -82,10 +79,11 @@ class ContactUsViewController: BaseViewController, MKMapViewDelegate {
     
     // MARK: - Private API
     private func setupContactUsViewController() {
-        
+
         // View Info
         viewInfo.backgroundColor = UIColor(hex: "#D3E4CDE6")
         viewInfo.layer.cornerRadius = 10
+        viewInfo.isUserInteractionEnabled = true
         imageViewBackground.addSubview(viewInfo)
         viewInfo.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(imageViewBackground.snp.top).offset(30)
@@ -126,6 +124,7 @@ class ContactUsViewController: BaseViewController, MKMapViewDelegate {
             make.left.equalTo(imageViewBackground.snp.left).offset(20)
             make.right.equalTo(imageViewBackground.snp.right).inset(20)
         }
+        
         // Label Contact Title
         labelContactTitle.text = "Contact Info"
         labelContactTitle.font = UIFont(name: "Galvji-Bold", size: 20.0)
@@ -138,7 +137,7 @@ class ContactUsViewController: BaseViewController, MKMapViewDelegate {
             make.right.equalTo(viewContact.snp.right).inset(10)
         }
         // Label Contact Section
-        labelContactSection.text = "202 N Granite St, Suite 207\nPrescott, AZ 86301\n\nPhone: 928-756-2500\n\nEmail: corey_marshall@coresupportinc.org"
+        labelContactSection.text = "Phone: 928-756-2500\n\nEmail: corey_marshall@coresupportinc.org"
         labelContactSection.font = UIFont(name: "Galvji", size: 14.0)
         labelContactSection.textColor = UIColor(hex: "#3D5C32FF")
         labelContactSection.textAlignment = NSTextAlignment.center
@@ -148,7 +147,56 @@ class ContactUsViewController: BaseViewController, MKMapViewDelegate {
             make.top.equalTo(self.labelContactTitle.snp.bottom).offset(10)
             make.left.equalTo(self.viewContact.snp.left).offset(15)
             make.right.equalTo(self.viewContact.snp.right).inset(15)
+        }
+        // Image View Map
+        imageViewMap.contentMode = UIView.ContentMode.scaleAspectFill
+        imageViewMap.image = UIImage(named: "map_image")
+        imageViewMap.layer.cornerRadius = 10
+        imageViewMap.layer.masksToBounds = true
+        imageViewMap.clipsToBounds = true
+        viewContact.addSubview(imageViewMap)
+        imageViewMap.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(self.labelContactSection.snp.bottom).offset(10)
+            make.left.equalTo(self.viewContact.snp.left).offset(15)
+            make.right.equalTo(self.viewContact.snp.right).inset(15)
             make.bottom.equalTo(self.viewContact.snp.bottom).inset(20)
+        }
+        
+        // View Map
+        viewMap.backgroundColor = UIColor(hex: "#3D5C3280")
+        viewMap.layer.cornerRadius = 10
+        
+        imageViewMap.addSubview(viewMap)
+        viewMap.snp.makeConstraints { (make) -> Void in
+            make.edges.equalTo(imageViewMap)
+        }
+
+        // Image View Arrow
+        imageViewArrow.contentMode = UIView.ContentMode.scaleAspectFit
+        imageViewArrow.image = UIImage(named: "arrow")
+        viewMap.addSubview(imageViewArrow)
+        imageViewArrow.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(self.viewMap.snp.top).offset(10)
+            make.right.equalTo(self.viewMap.snp.right).inset(10)
+            make.bottom.equalTo(self.viewMap.snp.bottom).inset(10)
+            make.centerY.equalTo(self.viewMap.snp.centerY)
+            make.height.equalTo(80)
+        }
+        
+    
+        // Label Contact Address
+        labelContactAddress.text = "202 N Granite St, Suite 207\nPrescott, AZ 86301"
+        labelContactAddress.font = UIFont(name: "Galvji-Bold", size: 12.0)
+        labelContactAddress.textColor = UIColor.white
+        labelContactAddress.textAlignment = NSTextAlignment.left
+        labelContactAddress.numberOfLines = 0;
+        viewMap.addSubview(labelContactAddress)
+        labelContactAddress.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(self.viewMap.snp.top).offset(10)
+            make.left.equalTo(self.viewMap.snp.left).offset(10)
+            make.right.equalTo(self.viewMap.snp.right).inset(10)
+            make.bottom.equalTo(self.viewMap.snp.bottom).inset(10)
+            make.centerY.equalTo(self.viewMap.snp.centerY)
         }
         
         // View Hours
@@ -185,35 +233,16 @@ class ContactUsViewController: BaseViewController, MKMapViewDelegate {
             make.bottom.equalTo(self.viewHours.snp.bottom).inset(20)
         }
         
-        // Map View
-        mapView.layer.cornerRadius = 10
-        imageViewBackground.addSubview(mapView)
-        mapView.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(self.viewHours.snp.bottom).offset(30)
-            make.left.equalTo(imageViewBackground.snp.left).offset(20)
-            make.right.equalTo(imageViewBackground.snp.right).inset(20)
-            make.bottom.equalTo(imageViewBackground.snp.bottom).inset(30)
-            make.height.equalTo(300)
-        }
     }
     
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+        let destinationVC = MapViewController()
+        self.navigationController?.pushViewController(destinationVC, animated: true)
+    }
     
     
     // MARK: - Public API
     
     
     
-}
-
-private extension MKMapView {
-  func centerToLocation(
-    _ location: CLLocation,
-    regionRadius: CLLocationDistance = 1000
-  ) {
-    let coordinateRegion = MKCoordinateRegion(
-      center: location.coordinate,
-      latitudinalMeters: regionRadius,
-      longitudinalMeters: regionRadius)
-    setRegion(coordinateRegion, animated: true)
-  }
 }
